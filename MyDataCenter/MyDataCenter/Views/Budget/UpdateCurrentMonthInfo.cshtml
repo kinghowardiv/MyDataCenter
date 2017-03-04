@@ -1,0 +1,18 @@
+﻿@model MyDataCenter.Models.POCOS.Month
+
+@{
+    ViewBag.Title = "Upload Sheets";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+
+@using (Html.BeginForm("SaveUpdatedMonthInfo", "Budget"))
+
+{
+    @Html.TextBoxFor(model => model.Name)
+    @Html.TextBoxFor(model => model.TotalPay)
+    @Html.TextBoxFor(model => model.Rent)
+    @Html.TextBoxFor(model => model.Utilities)
+    <input type="submit" value="Save" />
+}

@@ -10,7 +10,7 @@ namespace MyDataCenter.Business
             List<double> monthlyExpenseList, BudgetStatistics monthBudgetStats);
     }
 
-    public class BudgetStatisticsCalculator : IBudgetStatisicsCalculator
+    public class MonthlyBudgetStatisticsCalculator : IBudgetStatisicsCalculator
     {
         public BudgetStatistics CalculateBudgetStatistics(List<double> luxuryExpenseList,
             List<double> requiredExpenseList, List<double> monthlyExpenseList, BudgetStatistics monthBudgetStats)
@@ -21,6 +21,7 @@ namespace MyDataCenter.Business
             monthBudgetStats.LuxuryTotalSpent = CalculateLuxuryTotal(luxuryExpenseList);
             monthBudgetStats.TotalSpentPerMonth = CalculateTotalSpentPerMonth(monthBudgetStats);
             monthBudgetStats.TotalRemaining = CalculateTotalRemaining(monthBudgetStats);
+
             return monthBudgetStats;
         }
 

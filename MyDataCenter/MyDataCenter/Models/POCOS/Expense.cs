@@ -6,20 +6,8 @@ namespace MyDataCenter.Models.POCOS
     {
         public string Name { get; set; }
         public double Price { get; set; }
-    }
-
-    public class MonthlyExpense : Expense
-    {
-
-    }
-
-    public class LuxuryExpense : Expense
-    {
-
-    }
-
-    public class RequiredExpense : Expense
-    {
-
+        public string Type { get; set; }
+        public int Id { get; set; }
+        public int MonthId { get; set; }
     }
 }

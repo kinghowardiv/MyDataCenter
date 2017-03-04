@@ -24,7 +24,7 @@ namespace MyDataCenterTests
             _requiredExpenseList = new List<double>();
             _budgetStatistics = new BudgetStatistics();
             
-            _budgetStatisicsCalculator = new BudgetStatisticsCalculator();
+            _budgetStatisicsCalculator = new MonthlyBudgetStatisticsCalculator();
         }
 
         [TestCase(1,2,3)]

@@ -89,3 +89,9 @@ C:\Users\Howie\documents\visual studio 2015\Projects\MyDataCenter\MyDataCenter\b
 C:\Users\Howie\documents\visual studio 2015\Projects\MyDataCenter\MyDataCenter\obj\Debug\MyDataCenter.dll
 C:\Users\Howie\documents\visual studio 2015\Projects\MyDataCenter\MyDataCenter\obj\Debug\MyDataCenter.pdb
 C:\Users\Howie\documents\visual studio 2015\Projects\MyDataCenter\MyDataCenter\obj\Debug\MyDataCenter.csprojResolveAssemblyReference.cache
+C:\Users\Howie\Documents\Visual Studio 2015\Projects\MyDataCenter\MyDataCenter\bin\System.Net.Http.Formatting.dll
+C:\Users\Howie\Documents\Visual Studio 2015\Projects\MyDataCenter\MyDataCenter\bin\System.Web.Http.dll
+C:\Users\Howie\Documents\Visual Studio 2015\Projects\MyDataCenter\MyDataCenter\bin\System.Web.Http.WebHost.dll
+C:\Users\Howie\Documents\Visual Studio 2015\Projects\MyDataCenter\MyDataCenter\bin\System.Net.Http.Formatting.xml
+C:\Users\Howie\Documents\Visual Studio 2015\Projects\MyDataCenter\MyDataCenter\bin\System.Web.Http.xml
+C:\Users\Howie\Documents\Visual Studio 2015\Projects\MyDataCenter\MyDataCenter\bin\System.Web.Http.WebHost.xml

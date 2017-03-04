@@ -58,3 +58,4 @@ C:\Users\Howie\Documents\Visual Studio 2015\Projects\MyDataCenter\MyDataCenterTe
 C:\Users\Howie\Documents\Visual Studio 2015\Projects\MyDataCenter\MyDataCenterTests\bin\Debug\System.Web.WebPages.Razor.xml
 C:\Users\Howie\Documents\Visual Studio 2015\Projects\MyDataCenter\MyDataCenterTests\bin\Debug\System.Web.WebPages.xml
 C:\Users\Howie\Documents\Visual Studio 2015\Projects\MyDataCenter\MyDataCenterTests\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\Howie\Documents\Visual Studio 2015\Projects\MyDataCenter\MyDataCenterTests\bin\Debug\MyDataCenterTests.dll.config

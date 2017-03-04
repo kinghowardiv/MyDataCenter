@@ -20,14 +20,17 @@ namespace MyDataCenter.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Bob";
+            var sqlConnector = new SqlDataAccessor();
+            var months = sqlConnector.GetSingleMonthInfo(2, 2017);
 
-            return View();
+            return View(months);
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
+         //   var sqlConnector = new SqlDataAccessor();
+         //   sqlConnector.Update();
             return View();
         }
     }

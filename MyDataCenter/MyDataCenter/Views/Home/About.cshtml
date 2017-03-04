@@ -1,15 +1,30 @@
-﻿@{
+﻿@model IEnumerable<MyDataCenter.Models.POCOS.Month>
+
+@{
     ViewBag.Title = "Upload Sheets";
 }
+
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
 
-<body onload="myFunction()">
-
-    <input type="file" id="myFile" multiple size="50" onchange="myFunction()">
-
-    <p id="demo"></p>
-
-</body>
+<table>
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <!--More column headings-->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+            </tr>
+        }
+    </tbody>
+    <!--Add footer for totals-->
+</table>
