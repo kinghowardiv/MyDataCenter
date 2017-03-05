@@ -7,7 +7,7 @@ using Assert = NUnit.Framework.Assert;
 
 namespace MyDataCenterTests
 {
-    [TestClass]
+    [TestFixture]
     public class BudgetStatisiticsCalculatorTests
     {
         private List<Expense> _luxuryExpenseList;
@@ -29,14 +29,6 @@ namespace MyDataCenterTests
             _currentMonthStub.RequiredExpenses = _requiredExpenseList;
 
             _budgetStatisicsCalculator = new MonthlyBudgetStatisticsCalculator();
-        }
-
-        private Expense CreateTestExpense(double price)
-        {
-            return new Expense
-            {
-                Price = price
-            };
         }
 
         [TestCase(1,2,3)]
@@ -123,6 +115,14 @@ namespace MyDataCenterTests
             _budgetStatisicsCalculator.CalculateBudgetStatistics(_currentMonthStub);
 
             Assert.AreEqual(expected, _currentMonthStub.BudgetStatistics.TotalRemaining);
+        }
+
+        private Expense CreateTestExpense(double price)
+        {
+            return new Expense
+            {
+                Price = price
+            };
         }
     }
 }

@@ -79,7 +79,6 @@ C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\
 C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\MyDataCenterTests.dll
 C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\MyDataCenterTests.pdb
 C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\Castle.Core.dll
-C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\Moq.dll
 C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\MyDataCenter.dll
 C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\nunit.framework.dll
