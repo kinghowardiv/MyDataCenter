@@ -7,11 +7,12 @@ namespace MyDataCenter.Controllers
 {
     public class BudgetController : Controller
     {
+
         public ActionResult CurrentMonthInfo()
         {
             var month = DateTime.Now.Month;
             var year = DateTime.Now.Year;
-            var budgetInfoProvider = new MonthlyBudgetInfoProvider();
+            var budgetInfoProvider = new MonthlyBudgetInfoProvider(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
 
             var months = budgetInfoProvider.GetCurrentMonthInfo(month-1, year);
 
@@ -22,7 +23,7 @@ namespace MyDataCenter.Controllers
         {
             var month = DateTime.Now.Month;
             var year = DateTime.Now.Year;
-            var budgetInfoProvider = new MonthlyBudgetInfoProvider();
+            var budgetInfoProvider = new MonthlyBudgetInfoProvider(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
 
             var months = budgetInfoProvider.GetCurrentMonthInfo(month - 1, year);
 
@@ -34,7 +35,7 @@ namespace MyDataCenter.Controllers
         {
             var month = DateTime.Now.Month;
             var year = DateTime.Now.Year;
-            var budgetInfoProvider = new MonthlyBudgetInfoProvider();
+            var budgetInfoProvider = new MonthlyBudgetInfoProvider(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
 
             budgetInfoProvider.UpdateCurrentMonthInfo(month - 1, year, monthInfo);
             ModelState.Clear();

@@ -13,7 +13,14 @@ namespace MyDataCenter.Business
 
     public class MonthlyBudgetInfoProvider : IMonthlyBudgetInfoProvider
     {
-        private ISqlDataAccessor _sqlDataAccessor = new SqlDataAccessor();
+        private ISqlDataAccessor _sqlDataAccessor;
+        private IBudgetStatisicsCalculator _budgetStatsCalc;
+
+        public MonthlyBudgetInfoProvider(ISqlDataAccessor sqlDataAccessor, IBudgetStatisicsCalculator budgetStatsCalc)
+        {
+            _sqlDataAccessor = sqlDataAccessor;
+            _budgetStatsCalc = budgetStatsCalc;
+        }
 
         public Month GetCurrentMonthInfo(int month, int year)
         {
@@ -24,6 +31,7 @@ namespace MyDataCenter.Business
             currentMonthInfo.MonthlyExpenses = GetMonthlyExpenses(allMontlyExpenses);
             currentMonthInfo.LuxuryExpenses = GetLuxuryExpenses(allMontlyExpenses);
 
+            _budgetStatsCalc.CalculateBudgetStatistics(currentMonthInfo);
             return currentMonthInfo;
         }
 

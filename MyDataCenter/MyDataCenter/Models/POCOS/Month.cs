@@ -12,5 +12,6 @@ namespace MyDataCenter.Models.POCOS
         public List<Expense> RequiredExpenses { get; set; }
         public List<Expense> MonthlyExpenses { get; set; }
         public List<Expense> LuxuryExpenses { get; set; }  
+        public BudgetStatistics BudgetStatistics { get; set; }
     }
 }

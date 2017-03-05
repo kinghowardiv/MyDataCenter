@@ -6,54 +6,66 @@ namespace MyDataCenter.Business
 {
     public interface IBudgetStatisicsCalculator
     {
-        BudgetStatistics CalculateBudgetStatistics(List<double> luxuryExpenseList, List<double> requiredExpenseList,
-            List<double> monthlyExpenseList, BudgetStatistics monthBudgetStats);
+        void CalculateBudgetStatistics(Month currentMonthInfo);
     }
 
     public class MonthlyBudgetStatisticsCalculator : IBudgetStatisicsCalculator
     {
-        public BudgetStatistics CalculateBudgetStatistics(List<double> luxuryExpenseList,
-            List<double> requiredExpenseList, List<double> monthlyExpenseList, BudgetStatistics monthBudgetStats)
+        public void CalculateBudgetStatistics(Month currentMonthInfo)
         {
-            monthBudgetStats.RequiredTotalSpent = CalculateRequiredSpent(requiredExpenseList);
-            monthBudgetStats.MoneyLeftoverToSpendOnLuxury = CalculateMoneyLeftoverToSpendOnLuxury(monthBudgetStats);
-            monthBudgetStats.MonthlyTotalSpent = CalculateMonthlyTotal(monthlyExpenseList);
-            monthBudgetStats.LuxuryTotalSpent = CalculateLuxuryTotal(luxuryExpenseList);
-            monthBudgetStats.TotalSpentPerMonth = CalculateTotalSpentPerMonth(monthBudgetStats);
-            monthBudgetStats.TotalRemaining = CalculateTotalRemaining(monthBudgetStats);
+            var monthBudgetStats = new BudgetStatistics();
+            currentMonthInfo.BudgetStatistics = monthBudgetStats;
 
-            return monthBudgetStats;
+            monthBudgetStats.RequiredTotalSpent = CalculateRequiredSpent(currentMonthInfo.RequiredExpenses, currentMonthInfo);
+            monthBudgetStats.MoneyLeftoverToSpendOnLuxury = CalculateMoneyLeftoverToSpendOnLuxury(currentMonthInfo);
+            monthBudgetStats.MonthlyTotalSpent = CalculateMonthlyTotal(currentMonthInfo.MonthlyExpenses);
+            monthBudgetStats.LuxuryTotalSpent = CalculateLuxuryTotal(currentMonthInfo.LuxuryExpenses);
+            monthBudgetStats.TotalSpentPerMonth = CalculateTotalSpentPerMonth(monthBudgetStats);
+            monthBudgetStats.TotalRemaining = CalculateTotalRemaining(monthBudgetStats, currentMonthInfo);
+
+           // return monthBudgetStats;
         }
 
-        private double CalculateRequiredSpent(List<double> requiredExpenseList)
+        private double CalculateRequiredSpent(List<Expense> requiredExpenseList, Month currentMonthInfo)
         {
             var requiredSpent = 0.0;
 
-            requiredExpenseList.ForEach(x => requiredSpent = x + requiredSpent);
+            foreach (var expense in requiredExpenseList)
+            {
+                requiredSpent = expense.Price + requiredSpent;
+            }
+
+            requiredSpent = requiredSpent + currentMonthInfo.Rent + currentMonthInfo.Utilities;
 
             return requiredSpent;
         }
 
-        private double CalculateMoneyLeftoverToSpendOnLuxury(BudgetStatistics monthBudgetStats)
+        private double CalculateMoneyLeftoverToSpendOnLuxury(Month currentMonthInfo)
         {
-            return monthBudgetStats.TotalPay - monthBudgetStats.RequiredTotalSpent;
+            return currentMonthInfo.TotalPay - currentMonthInfo.BudgetStatistics.RequiredTotalSpent;
         }
 
-        private double CalculateMonthlyTotal(List<double> monthlyExpenseList)
+        private double CalculateMonthlyTotal(List<Expense> monthlyExpenseList)
         {
             var monthlySpent = 0.0;
 
-            monthlyExpenseList.ForEach(x => monthlySpent = x + monthlySpent);
+            foreach (var expense in monthlyExpenseList)
+            {
+                monthlySpent = expense.Price + monthlySpent;
+            }
 
             return monthlySpent;
         }
 
 
-        private double CalculateLuxuryTotal(List<double> luxuryExpenseList)
+        private double CalculateLuxuryTotal(List<Expense> requiredExpenseList)
         {
             var luxurySpent = 0.0;
 
-            luxuryExpenseList.ForEach(x => luxurySpent = x + luxurySpent);
+            foreach (var expense in requiredExpenseList)
+            {
+                luxurySpent = expense.Price + luxurySpent;
+            }
 
             return luxurySpent;
         }
@@ -64,9 +76,9 @@ namespace MyDataCenter.Business
                      monthBudgetStats.MonthlyTotalSpent;
         }
 
-        private double CalculateTotalRemaining(BudgetStatistics monthBudgetStats)
+        private double CalculateTotalRemaining(BudgetStatistics monthBudgetStats, Month currentMonthInfo)
         {
-            return monthBudgetStats.TotalPay -
+            return currentMonthInfo.TotalPay -
                    (monthBudgetStats.RequiredTotalSpent + monthBudgetStats.LuxuryTotalSpent +
                     monthBudgetStats.MonthlyTotalSpent);
         }

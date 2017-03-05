@@ -11,7 +11,7 @@ namespace MyDataCenter.Business
     {
         Month GetSingleMonthInfo(int currentMonth, int year);
         List<Expense> GetMonthlyExpenses(int currentMonth, int year);
-        // void Update();
+       // void Update();
         void UpdateMonthlyInfo(Month monthInfo, int month, int year);
     }
 
@@ -102,7 +102,7 @@ namespace MyDataCenter.Business
             myCommand.Connection = myConnection;
             myCommand.CommandType = CommandType.Text;
 
-            myCommand.CommandText = "insert into Month(Id, TotalPay, Rent, Utilities, Name) values('" + month + "_" + year + "'" + "'," + monthInfo.TotalPay + "," + monthInfo.Rent + "," + monthInfo.Utilities + ",'" + monthInfo.Name+ "')";
+            myCommand.CommandText = "insert into Month(Id, TotalPay, Rent, Utilities, Name) values('" + month + "_" + year + "'," + monthInfo.TotalPay + "," + monthInfo.Rent + "," + monthInfo.Utilities + ",'" + monthInfo.Name+ "')";
             myCommand.ExecuteNonQuery();
 
             myConnection.Close();
@@ -126,7 +126,7 @@ namespace MyDataCenter.Business
                     myCommand.Connection = myConnection;
                     myCommand.CommandType = CommandType.Text;
 
-                    myCommand.CommandText = "insert into Expenses(Name, Price, Type, MonthId, Id) Values('" + name + "'," + priceList[counter] + ", 'Luxury', '2_2017'," + (counter + 4) + ")";
+                    myCommand.CommandText = "insert into Expenses(Name, Price, Type, MonthId, Id) Values('" + name + "'," + priceList[counter] + ", 'Luxury', '2_2017'," + (counter + 7) + ")";
                     myCommand.ExecuteNonQuery();
                     counter++;
                 }

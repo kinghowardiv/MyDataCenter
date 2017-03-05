@@ -3,7 +3,6 @@ namespace MyDataCenter.Models.POCOS
 {
     public class BudgetStatistics
     {
-        public double TotalPay { get; set; }
         public double RequiredTotalSpent { get; set; }    
         public double MoneyLeftoverToSpendOnLuxury { get; set; }
         public double MonthlyTotalSpent { get; set; }
