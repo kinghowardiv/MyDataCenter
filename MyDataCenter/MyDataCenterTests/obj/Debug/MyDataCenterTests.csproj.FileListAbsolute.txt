@@ -59,9 +59,6 @@ C:\Users\Howie\Documents\Visual Studio 2015\Projects\MyDataCenter\MyDataCenterTe
 C:\Users\Howie\Documents\Visual Studio 2015\Projects\MyDataCenter\MyDataCenterTests\bin\Debug\System.Web.WebPages.xml
 C:\Users\Howie\Documents\Visual Studio 2015\Projects\MyDataCenter\MyDataCenterTests\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\Howie\Documents\Visual Studio 2015\Projects\MyDataCenter\MyDataCenterTests\bin\Debug\MyDataCenterTests.dll.config
-C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\obj\Debug\MyDataCenterTests.csprojResolveAssemblyReference.cache
-C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\obj\Debug\MyDataCenterTests.dll
-C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\obj\Debug\MyDataCenterTests.pdb
 C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\ApplicationInsights.config
 C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\roslyn\csc.exe
 C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -119,3 +116,6 @@ C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\
 C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\System.Web.WebPages.Razor.xml
 C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\System.Web.WebPages.xml
 C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\obj\Debug\MyDataCenterTests.csprojResolveAssemblyReference.cache
+C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\obj\Debug\MyDataCenterTests.dll
+C:\Users\Howie\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\obj\Debug\MyDataCenterTests.pdb

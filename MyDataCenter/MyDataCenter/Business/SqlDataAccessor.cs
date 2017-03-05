@@ -13,6 +13,7 @@ namespace MyDataCenter.Business
         List<Expense> GetMonthlyExpenses(int currentMonth, int year);
        // void Update();
         void UpdateMonthlyInfo(Month monthInfo, int month, int year);
+        void UpdateExpenseInfo(Expense expense, int month, int year);
     }
 
     public class SqlDataAccessor : ISqlDataAccessor
@@ -77,6 +78,8 @@ namespace MyDataCenter.Business
                     expense.Name = myReader["Name"].ToString();
                     expense.Price = Convert.ToDouble(myReader["Price"]);
                     expense.Type = myReader["Type"].ToString();
+                    expense.Id = Convert.ToInt32(myReader["Id"]);
+                    expense.MonthId = myReader["MonthId"].ToString();
 
                     expenses.Add(expense);
                 }
@@ -103,6 +106,22 @@ namespace MyDataCenter.Business
             myCommand.CommandType = CommandType.Text;
 
             myCommand.CommandText = "insert into Month(Id, TotalPay, Rent, Utilities, Name) values('" + month + "_" + year + "'," + monthInfo.TotalPay + "," + monthInfo.Rent + "," + monthInfo.Utilities + ",'" + monthInfo.Name+ "')";
+            myCommand.ExecuteNonQuery();
+
+            myConnection.Close();
+        }
+
+        public void UpdateExpenseInfo(Expense expense, int month, int year)
+        {
+            var myConnection = GetSqlConnection();
+
+            myConnection.Open();
+
+            SqlCommand myCommand = new SqlCommand();
+            myCommand.Connection = myConnection;
+            myCommand.CommandType = CommandType.Text;
+
+            myCommand.CommandText = "Update Expenses Set Price=" + expense.Price + ", Name='" +  expense.Name + "', Type='" + expense.Type + "' Where Id =" + expense.Id;
             myCommand.ExecuteNonQuery();
 
             myConnection.Close();

@@ -1,7 +1,6 @@
 ﻿using MyDataCenter.Models.POCOS;
-using MyDataCenter.Business;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace MyDataCenter.Business
 {
@@ -9,6 +8,8 @@ namespace MyDataCenter.Business
     {
         Month GetCurrentMonthInfo(int month, int year);
         void UpdateCurrentMonthInfo(int month, int year, Month monthInfo);
+        void UpdateExpenseInfo(int month, int year, Expense expense);
+        List<Expense> GetExpensesToUpdate(Month monthInfo, int[] expensesIds);
     }
 
     public class MonthlyBudgetInfoProvider : IMonthlyBudgetInfoProvider
@@ -38,6 +39,35 @@ namespace MyDataCenter.Business
         public void UpdateCurrentMonthInfo(int month, int year, Month monthInfo)
         {
             _sqlDataAccessor.UpdateMonthlyInfo(monthInfo, month, year);
+        }
+
+        public void UpdateExpenseInfo(int month, int year, Expense expense)
+        {
+            _sqlDataAccessor.UpdateExpenseInfo(expense, month, year);
+        }
+
+        public List<Expense> GetExpensesToUpdate(Month monthInfo, int[] expensesIds)
+        {
+            var expenseList = new List<Expense>();
+
+            foreach (var id in expensesIds)
+            {
+                var expense = new Expense();
+
+                if (IsLuxuryExpense(monthInfo.LuxuryExpenses, id))
+                    expense = GetLuxuryExpense(monthInfo.LuxuryExpenses, id);
+
+                if (IsMonthlyExpense(monthInfo.MonthlyExpenses, id))
+                    expense = GetMonthlyExpense(monthInfo.MonthlyExpenses, id);
+
+                if (IsRequiredExpense(monthInfo.RequiredExpenses, id))
+                    expense = GetRequiredExpense(monthInfo.RequiredExpenses, id);
+
+                expenseList.Add(expense);
+            }
+            
+
+            return expenseList;
         }
 
         private List<Expense> GetRequiredExpenses(List<Expense> allMonthlyExpenses)
@@ -77,6 +107,51 @@ namespace MyDataCenter.Business
             }
 
             return luxuryExpenses;
+        }
+
+        private bool IsLuxuryExpense(List<Expense> luxuryExpeneses, int id)
+        {
+            foreach (var expense in luxuryExpeneses)
+            {
+                if (expense.Id == id)
+                    return true;
+            }
+            return false;
+        }
+
+        private bool IsRequiredExpense(List<Expense> requiredExpeneses, int id)
+        {
+            foreach (var expense in requiredExpeneses)
+            {
+                if (expense.Id == id)
+                    return true;
+            }
+            return false;
+        }
+
+        private bool IsMonthlyExpense(List<Expense> monthlyExpeneses, int id)
+        {
+            foreach (var expense in monthlyExpeneses)
+            {
+                if (expense.Id == id)
+                    return true;
+            }
+            return false;
+        }
+
+        private Expense GetLuxuryExpense(List<Expense> luxuryExpeneses, int id)
+        {
+            return luxuryExpeneses.FirstOrDefault(x => x.Id == id);
+        }
+
+        private Expense GetRequiredExpense(List<Expense> requiredExpeneses, int id)
+        {
+            return requiredExpeneses.FirstOrDefault(x => x.Id == id);
+        }
+
+        private Expense GetMonthlyExpense(List<Expense> monthlyExpeneses, int id)
+        {
+            return monthlyExpeneses.FirstOrDefault(x => x.Id == id);
         }
     }
 }

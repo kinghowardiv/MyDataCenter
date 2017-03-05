@@ -311,6 +311,8 @@
     <Content Include="Views\Budget\CurrentMonthInfo.cshtml" />
     <Content Include="Views\Budget\UpdateCurrentMonthInfo.cshtml" />
     <Content Include="Views\Budget\SaveUpdatedMonthInfo.cshtml" />
+    <Content Include="Views\Budget\SaveUpdatedExpenseInfo.cshtml" />
+    <Content Include="Views\Budget\SelectUpdatedExpenseInfoToSave.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

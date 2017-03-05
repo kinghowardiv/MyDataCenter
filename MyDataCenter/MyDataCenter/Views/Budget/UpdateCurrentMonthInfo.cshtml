@@ -1,18 +1,102 @@
 ﻿@model MyDataCenter.Models.POCOS.Month
 
 @{
-    ViewBag.Title = "Upload Sheets";
+    ViewBag.Title = "Update This Month's Budget";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h1>@ViewBag.Title.</h1>
 
-
+<h2>Update Budget Basics</h2>
 @using (Html.BeginForm("SaveUpdatedMonthInfo", "Budget"))
-
 {
+    <p>Budget Name</p>
     @Html.TextBoxFor(model => model.Name)
+    <br />
+    <br />
+    <p>Total Pay</p>
     @Html.TextBoxFor(model => model.TotalPay)
+    <br />
+    <br />
+    <p>Rent</p>
     @Html.TextBoxFor(model => model.Rent)
+    <br />
+    <br />
+    <p>Utilities</p>
     @Html.TextBoxFor(model => model.Utilities)
+    <br />
+    <br />
+
     <input type="submit" value="Save" />
 }
+
+
+@using (Html.BeginForm("SelectUpdatedExpenseInfoToSave", "Budget"))
+{
+    <h2>Required Expenses</h2>
+    <table>
+        <tbody>        
+        @foreach (var item in Model.RequiredExpenses)
+        {
+            <tr>
+                <td><input id="expenses" name="expensesIds" type="checkbox" value="@item.Id"/> </td>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+            </tr>
+        }  
+        </tbody>
+
+        <tr>
+            <td><input type="submit" value="Save" id="ButtonSubmit" /></td>
+
+        </tr>
+    </table>
+}
+
+@using (Html.BeginForm("SelectUpdatedExpenseInfoToSave", "Budget"))
+{
+    <h2>Monthly Expenses</h2>
+    <table>
+        <tbody>
+            @foreach (var item in Model.MonthlyExpenses)
+            {
+                <tr>
+                    <td><input id="expenses" name="expensesIds" type="checkbox" value="@item.Id" /> </td>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <tr>
+        <td><input type="submit" value="Save" id="ButtonSubmit" /></td>
+
+    </tr>
+}
+
+@using (Html.BeginForm("SelectUpdatedExpenseInfoToSave", "Budget"))
+{
+    <h2>Luxury Expenses</h2>
+    <table>
+        <tbody>
+            @foreach (var item in Model.LuxuryExpenses)
+            {
+                <tr>
+                    <td><input id="expenses" name="expensesIds" type="checkbox" value="@item.Id" /> </td>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <tr>
+        <td><input type="submit" value="Save" id="ButtonSubmit" /></td>
+
+    </tr>
+}
+
+
+
+
+    

@@ -8,6 +8,7 @@ namespace MyDataCenter.Models.POCOS
         public double Price { get; set; }
         public string Type { get; set; }
         public int Id { get; set; }
-        public int MonthId { get; set; }
+        public string MonthId { get; set; }
+        public bool IsSelected { get; set; }
     }
 }

@@ -98,5 +98,7 @@ namespace MyDataCenterTests
 
             Assert.AreEqual(_luxuryExpenseStub, month.LuxuryExpenses[0]);
         }
+
+
     }
 }

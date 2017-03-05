@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MyDataCenter.Models.POCOS.Expense>
+
+@{
+    ViewBag.Title = "Expenses to Update";
+}
+
+<h1>@ViewBag.Title.</h1>
+
+@using (Html.BeginForm("SaveUpdatedExpenseInfo", "Budget"))
+
+{
+    <div>
+        @{ var index = 0; }
+        @foreach (var item in Model)
+        {
+            <div>
+                <input type="text" name="[@index].Name" value="@item.Name" />
+                <input type="text" name="[@index].Price" value="@item.Price" />
+                <input type="text" name="[@index].Type" value="@item.Type" />
+                <input type="hidden" name="[@index].Id" value="@item.Id" />
+            </div>
+            index++;
+        }
+
+        <input type="submit" value="Save" />
+    </div>
+}
+
+

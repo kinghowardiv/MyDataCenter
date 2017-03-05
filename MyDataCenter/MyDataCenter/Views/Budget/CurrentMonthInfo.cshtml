@@ -1,19 +1,10 @@
 ﻿@model MyDataCenter.Models.POCOS.Month
 
-@{
-    ViewBag.Title = "This Months Budget Info";
-}
-
-<h1>@ViewBag.Title.</h1>
+<h1>@ViewBag.Title</h1>
 
 <h2>Overview</h2>
 <table>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Name)</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
             <th>@Html.DisplayNameFor(model => model.TotalPay)</th>
             <td></td>
             <td></td>
@@ -58,13 +49,6 @@
         </tr>
 
             <tr>
-                <td>
-                    @Html.DisplayFor(model => model.Name)
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
                 <td>
                     @Html.DisplayFor(model => model.TotalPay)
                 </td>
@@ -128,7 +112,7 @@
 </table>
 
 <h2>Required Expenses</h2>
-<table>
+<table id="table">
     <tr>
         <th>Name</th>
         <td></td>
@@ -140,7 +124,6 @@
 @foreach (var item in Model.RequiredExpenses)
 {
     <tr>
-
             <td>
                 @item.Name
             </td>
@@ -153,6 +136,7 @@
             </td>
     </tr>
 }
+
 </table>
 
 <h2>Monthly Expenses</h2>
