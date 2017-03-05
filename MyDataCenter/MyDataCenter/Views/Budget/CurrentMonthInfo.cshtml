@@ -30,6 +30,31 @@
             <td></td>
             <td></td>
             <th>@Html.DisplayNameFor(model => model.BudgetStatistics.RequiredTotalSpent)</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>@Html.DisplayNameFor(model => model.BudgetStatistics.MonthlyTotalSpent)</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>@Html.DisplayNameFor(model => model.BudgetStatistics.MoneyLeftoverToSpendOnLuxury)</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>@Html.DisplayNameFor(model => model.BudgetStatistics.LuxuryTotalSpent)</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>@Html.DisplayNameFor(model => model.BudgetStatistics.TotalSpentPerMonth)</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>@Html.DisplayNameFor(model => model.BudgetStatistics.TotalRemaining)</th>
         </tr>
 
             <tr>
@@ -64,6 +89,41 @@
                 <td>
                     @Html.DisplayFor(model => model.BudgetStatistics.RequiredTotalSpent)
                 </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    @Html.DisplayFor(model => model.BudgetStatistics.MonthlyTotalSpent)
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    @Html.DisplayFor(model => model.BudgetStatistics.MoneyLeftoverToSpendOnLuxury)
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    @Html.DisplayFor(model => model.BudgetStatistics.LuxuryTotalSpent)
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    @Html.DisplayFor(model => model.BudgetStatistics.TotalSpentPerMonth)
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    @Html.DisplayFor(model => model.BudgetStatistics.TotalRemaining)
+                </td>
             </tr>
 </table>
 
@@ -77,9 +137,10 @@
         <td></td>
         <th>Price</th>
     </tr>
+@foreach (var item in Model.RequiredExpenses)
+{
     <tr>
-        @foreach (var item in Model.RequiredExpenses)
-        {
+
             <td>
                 @item.Name
             </td>
@@ -90,8 +151,8 @@
             <td>
                 @item.Price
             </td>
-        }
     </tr>
+}
 </table>
 
 <h2>Monthly Expenses</h2>
@@ -104,9 +165,10 @@
         <td></td>
         <th>Price</th>
     </tr>
+@foreach (var item in Model.MonthlyExpenses)
+{
     <tr>
-        @foreach (var item in Model.MonthlyExpenses)
-        {
+
             <td>
                 @item.Name
             </td>
@@ -117,8 +179,8 @@
             <td>
                 @item.Price
             </td>
-        }
     </tr>
+}
 </table>
 
 <h2>Luxury Expenses</h2>

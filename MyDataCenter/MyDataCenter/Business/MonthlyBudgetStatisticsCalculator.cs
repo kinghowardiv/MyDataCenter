@@ -22,8 +22,6 @@ namespace MyDataCenter.Business
             monthBudgetStats.LuxuryTotalSpent = CalculateLuxuryTotal(currentMonthInfo.LuxuryExpenses);
             monthBudgetStats.TotalSpentPerMonth = CalculateTotalSpentPerMonth(monthBudgetStats);
             monthBudgetStats.TotalRemaining = CalculateTotalRemaining(monthBudgetStats, currentMonthInfo);
-
-           // return monthBudgetStats;
         }
 
         private double CalculateRequiredSpent(List<Expense> requiredExpenseList, Month currentMonthInfo)
