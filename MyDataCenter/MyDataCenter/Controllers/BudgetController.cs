@@ -61,6 +61,7 @@ namespace MyDataCenter.Controllers
         }
 
         [HttpPost]
+
         public ActionResult SaveUpdatedExpenseInfo(ICollection<Expense> expenses)
         {
             var month = DateTime.Now.Month;
@@ -76,6 +77,20 @@ namespace MyDataCenter.Controllers
             ModelState.Clear();
 
             return View(monthInfo);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteExpense(Month monthInfo, int[] expensesIds)
+        {
+            var month = DateTime.Now.Month;
+            var year = DateTime.Now.Year;
+            var budgetInfoProvider = new MonthlyBudgetInfoProvider(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
+
+            budgetInfoProvider.DeleteExpense(expensesIds);
+
+            ViewBag.DeleteMessage = expensesIds.Count() + " Expenses Deleted";
+
+            return View();
         }
     }
 }

@@ -10,14 +10,15 @@ namespace MyDataCenter.Business
         void UpdateCurrentMonthInfo(int month, int year, Month monthInfo);
         void UpdateExpenseInfo(int month, int year, Expense expense);
         List<Expense> GetExpensesToUpdate(Month monthInfo, int[] expensesIds);
+        void DeleteExpense(int[] expenseIds);
     }
 
     public class MonthlyBudgetInfoProvider : IMonthlyBudgetInfoProvider
     {
         private ISqlDataAccessor _sqlDataAccessor;
-        private IBudgetStatisicsCalculator _budgetStatsCalc;
+        private IMonthlyBudgetStatisicsCalculator _budgetStatsCalc;
 
-        public MonthlyBudgetInfoProvider(ISqlDataAccessor sqlDataAccessor, IBudgetStatisicsCalculator budgetStatsCalc)
+        public MonthlyBudgetInfoProvider(ISqlDataAccessor sqlDataAccessor, IMonthlyBudgetStatisicsCalculator budgetStatsCalc)
         {
             _sqlDataAccessor = sqlDataAccessor;
             _budgetStatsCalc = budgetStatsCalc;
@@ -33,6 +34,7 @@ namespace MyDataCenter.Business
             currentMonthInfo.LuxuryExpenses = GetLuxuryExpenses(allMontlyExpenses);
 
             _budgetStatsCalc.CalculateBudgetStatistics(currentMonthInfo);
+
             return currentMonthInfo;
         }
 
@@ -68,6 +70,14 @@ namespace MyDataCenter.Business
             
 
             return expenseList;
+        }
+
+        public void DeleteExpense(int[] expenseIds)
+        {
+            foreach (var id in expenseIds)
+            {
+                _sqlDataAccessor.DeleteExpense(id);
+            }
         }
 
         private List<Expense> GetRequiredExpenses(List<Expense> allMonthlyExpenses)

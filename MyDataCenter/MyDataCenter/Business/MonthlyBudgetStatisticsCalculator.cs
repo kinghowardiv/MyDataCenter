@@ -4,12 +4,12 @@ using System;
 
 namespace MyDataCenter.Business
 {
-    public interface IBudgetStatisicsCalculator
+    public interface IMonthlyBudgetStatisicsCalculator
     {
         void CalculateBudgetStatistics(Month currentMonthInfo);
     }
 
-    public class MonthlyBudgetStatisticsCalculator : IBudgetStatisicsCalculator
+    public class MonthlyBudgetStatisticsCalculator : IMonthlyBudgetStatisicsCalculator
     {
         public void CalculateBudgetStatistics(Month currentMonthInfo)
         {

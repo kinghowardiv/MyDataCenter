@@ -1,0 +1,206 @@
+﻿@model MyDataCenter.Models.POCOS.Month
+
+<body onload="AlertDeletedItems()">
+    <h1>@ViewBag.Title</h1>
+
+    <h2>Overview</h2>
+    <table>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.TotalPay)</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>@Html.DisplayNameFor(model => model.Rent)</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>@Html.DisplayNameFor(model => model.Utilities)</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>@Html.DisplayNameFor(model => model.BudgetStatistics.RequiredTotalSpent)</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>@Html.DisplayNameFor(model => model.BudgetStatistics.MonthlyTotalSpent)</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>@Html.DisplayNameFor(model => model.BudgetStatistics.MoneyLeftoverToSpendOnLuxury)</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>@Html.DisplayNameFor(model => model.BudgetStatistics.LuxuryTotalSpent)</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>@Html.DisplayNameFor(model => model.BudgetStatistics.TotalSpentPerMonth)</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>@Html.DisplayNameFor(model => model.BudgetStatistics.TotalRemaining)</th>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.TotalPay)
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(model => model.Rent)
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(model => model.Utilities)
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(model => model.BudgetStatistics.RequiredTotalSpent)
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(model => model.BudgetStatistics.MonthlyTotalSpent)
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(model => model.BudgetStatistics.MoneyLeftoverToSpendOnLuxury)
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(model => model.BudgetStatistics.LuxuryTotalSpent)
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(model => model.BudgetStatistics.TotalSpentPerMonth)
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(model => model.BudgetStatistics.TotalRemaining)
+            </td>
+        </tr>
+    </table>
+
+    <h2>Required Expenses</h2>
+    <table id="table">
+        <tr>
+            <th>Name</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>Price</th>
+        </tr>
+        @foreach (var item in Model.RequiredExpenses)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    @item.Price
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <h2>Monthly Expenses</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>Price</th>
+        </tr>
+        @foreach (var item in Model.MonthlyExpenses)
+        {
+            <tr>
+
+                <td>
+                    @item.Name
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    @item.Price
+                </td>
+            </tr>
+        }
+    </table>
+
+    <h2>Luxury Expenses</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>Price</th>
+        </tr>
+        @foreach (var item in Model.LuxuryExpenses)
+        {
+            <tr>
+
+                <td>
+                    @item.Name
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    @item.Price
+                </td>
+            </tr>
+        }
+    </table>
+
+</body>
+
+<script>
+    function myFunction() {
+        alert(@ViewBag.DeleteMessage);
+    }
+</script>
+

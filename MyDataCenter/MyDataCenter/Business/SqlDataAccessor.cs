@@ -14,6 +14,8 @@ namespace MyDataCenter.Business
        // void Update();
         void UpdateMonthlyInfo(Month monthInfo, int month, int year);
         void UpdateExpenseInfo(Expense expense, int month, int year);
+        void DeleteExpense(int expenseId);
+        void CreateExpense(Expense expense);
     }
 
     public class SqlDataAccessor : ISqlDataAccessor
@@ -30,14 +32,14 @@ namespace MyDataCenter.Business
         public Month GetSingleMonthInfo(int currentMonth, int year)
         {
             var myConnection = GetSqlConnection();
+            var month = new Month();
 
             myConnection.Open();
-            var month = new Month();
 
             try
             {
                 SqlDataReader myReader = null;
-                SqlCommand myCommand = new SqlCommand("SELECT * FROM Month WHERE Id='" + currentMonth + "_" + year + "'",
+                var myCommand = new SqlCommand("SELECT * FROM Month WHERE Id='" + currentMonth + "_" + year + "'",
                                                          myConnection);
                 myReader = myCommand.ExecuteReader();
                 while (myReader.Read())
@@ -101,11 +103,12 @@ namespace MyDataCenter.Business
 
             myConnection.Open();
 
-            SqlCommand myCommand = new SqlCommand();
+            var myCommand = new SqlCommand();
             myCommand.Connection = myConnection;
             myCommand.CommandType = CommandType.Text;
 
-            myCommand.CommandText = "insert into Month(Id, TotalPay, Rent, Utilities, Name) values('" + month + "_" + year + "'," + monthInfo.TotalPay + "," + monthInfo.Rent + "," + monthInfo.Utilities + ",'" + monthInfo.Name+ "')";
+            myCommand.CommandText = "INSERT INTO Month(Id, TotalPay, Rent, Utilities, Name) " +
+               "VALUES('" + month + "_" + year + "'," + monthInfo.TotalPay + "," + monthInfo.Rent + "," + monthInfo.Utilities + ",'" + monthInfo.Name+ "')";
             myCommand.ExecuteNonQuery();
 
             myConnection.Close();
@@ -117,11 +120,44 @@ namespace MyDataCenter.Business
 
             myConnection.Open();
 
-            SqlCommand myCommand = new SqlCommand();
+            var myCommand = new SqlCommand();
             myCommand.Connection = myConnection;
             myCommand.CommandType = CommandType.Text;
 
-            myCommand.CommandText = "Update Expenses Set Price=" + expense.Price + ", Name='" +  expense.Name + "', Type='" + expense.Type + "' Where Id =" + expense.Id;
+            myCommand.CommandText = "UPDATE Expenses SET Price=" + expense.Price + ", Name='" +  expense.Name + "', Type='" + expense.Type + "' WHERE Id =" + expense.Id;
+            myCommand.ExecuteNonQuery();
+
+            myConnection.Close();
+        }
+
+        public void DeleteExpense(int expenseId)
+        {
+            var myConnection = GetSqlConnection();
+
+            myConnection.Open();
+
+            var myCommand = new SqlCommand();
+            myCommand.Connection = myConnection;
+            myCommand.CommandType = CommandType.Text;
+
+            myCommand.CommandText = "DELETE FROM Expenses WHERE Id=" + expenseId;
+            myCommand.ExecuteNonQuery();
+
+            myConnection.Close();
+        }
+
+        public void CreateExpense(Expense expense)
+        {
+            var myConnection = GetSqlConnection();
+
+            myConnection.Open();
+
+            var myCommand = new SqlCommand();
+            myCommand.Connection = myConnection;
+            myCommand.CommandType = CommandType.Text;
+
+            myCommand.CommandText = "INSERT INTO Expenses (Id, MonthId, Name, Price, Type) " +
+               "VALUES(" + expense.Id + ",'" + expense.MonthId + "','" + expense.Name + "'," + expense.Price + ",'" + expense.Type + "'"; 
             myCommand.ExecuteNonQuery();
 
             myConnection.Close();
@@ -141,7 +177,7 @@ namespace MyDataCenter.Business
 
                 foreach(var name in namesList)
                 {
-                    SqlCommand myCommand = new SqlCommand();
+                    var myCommand = new SqlCommand();
                     myCommand.Connection = myConnection;
                     myCommand.CommandType = CommandType.Text;
 

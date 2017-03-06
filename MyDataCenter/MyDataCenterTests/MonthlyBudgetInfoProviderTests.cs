@@ -11,29 +11,33 @@ namespace MyDataCenterTests
     {
         private IMonthlyBudgetInfoProvider _monthlyBudgetInfoProvider;
         private Mock<ISqlDataAccessor> _sqlDataAccessorMock;
-        private Mock<IBudgetStatisicsCalculator> _budgetStatsCalculatorMock;
+        private Mock<IMonthlyBudgetStatisicsCalculator> _budgetStatsCalculatorMock;
         private Month _currentMonthStub;
         private Expense _luxuryExpenseStub;
         private Expense _monthlyExpenseStub;
         private Expense _requiredExpenseStub;
+        private List<Expense> _testExpenseList;
 
         [SetUp]
         public void Setup()
         {
             _luxuryExpenseStub = new Expense
             {
-                Type = "Luxury"
+                Type = "Luxury",
+                Id = 1
             };
             _monthlyExpenseStub = new Expense
             {
-                Type = "Monthly"
+                Type = "Monthly",
+                Id = 2
             };
             _requiredExpenseStub = new Expense
             {
-                Type = "Required"
+                Type = "Required",
+                Id = 3
             };
 
-            var testExpenseList = new List<Expense>
+            _testExpenseList = new List<Expense>
             {
                 _luxuryExpenseStub,
                 _monthlyExpenseStub,
@@ -44,15 +48,15 @@ namespace MyDataCenterTests
 
             _sqlDataAccessorMock = new Mock<ISqlDataAccessor>();
             _sqlDataAccessorMock.Setup(x => x.GetSingleMonthInfo(It.IsAny<int>(), It.IsAny<int>())).Returns(_currentMonthStub);
-            _sqlDataAccessorMock.Setup(x => x.GetMonthlyExpenses(It.IsAny<int>(), It.IsAny<int>())).Returns(testExpenseList);
+            _sqlDataAccessorMock.Setup(x => x.GetMonthlyExpenses(It.IsAny<int>(), It.IsAny<int>())).Returns(_testExpenseList);
 
-            _budgetStatsCalculatorMock = new Mock<IBudgetStatisicsCalculator>();
+            _budgetStatsCalculatorMock = new Mock<IMonthlyBudgetStatisicsCalculator>();
            
             _monthlyBudgetInfoProvider = new MonthlyBudgetInfoProvider(_sqlDataAccessorMock.Object, _budgetStatsCalculatorMock.Object);
         }
 
         [Test]
-        public void UpdateCurrentMonthlyInfoCallsUpdateInSqlAccessorTest()
+        public void UpdateCurrentMonthlyInfoUpdatesMonthInfoCorrectlyTest()
         {
             _monthlyBudgetInfoProvider.UpdateCurrentMonthInfo(1, 1, new Month());
 
@@ -68,7 +72,7 @@ namespace MyDataCenterTests
         }
 
         [Test]
-        public void GetCurrentMonthInfoCallsGetSingleMonthInfoInSqlAccessorTest()
+        public void GetCurrentMonthInfoReturnsTheInfoForCurrentMonthTest()
         {
             var month = _monthlyBudgetInfoProvider.GetCurrentMonthInfo(1, 1);
 
@@ -99,6 +103,64 @@ namespace MyDataCenterTests
             Assert.AreEqual(_luxuryExpenseStub, month.LuxuryExpenses[0]);
         }
 
+        [Test]
+        public void UpdateExpenseUpdatesExpenseCorrectlyTest()
+        {
+            _monthlyBudgetInfoProvider.UpdateExpenseInfo(1, 1, new Expense());
 
+            _sqlDataAccessorMock.Verify(x => x.UpdateExpenseInfo(It.IsAny<Expense>(), It.IsAny<int>(), It.IsAny<int>()), Times.Once);   
+        }
+
+        [Test]
+        public void GetExpensesToUpdateCanGetLuxuryExpenseTest()
+        {
+            PopulateMonthlyExpenseLists();
+            var expenseIdList = new int[]{ 1 };
+
+            var expectedExpenseList = _monthlyBudgetInfoProvider.GetExpensesToUpdate(_currentMonthStub, expenseIdList);
+
+            Assert.AreEqual(_luxuryExpenseStub, expectedExpenseList[0]);
+            Assert.AreEqual(expectedExpenseList[0].Type, "Luxury");
+        }
+
+        [Test]
+        public void GetExpensesToUpdateCanGetMonthlyExpenseTest()
+        {
+            PopulateMonthlyExpenseLists();
+            var expenseIdList = new int[] { 2 };
+
+            var expectedExpenseList = _monthlyBudgetInfoProvider.GetExpensesToUpdate(_currentMonthStub, expenseIdList);
+
+            Assert.AreEqual(_monthlyExpenseStub, expectedExpenseList[0]);
+            Assert.AreEqual(expectedExpenseList[0].Type, "Monthly");
+        }
+
+        [Test]
+        public void GetExpensesToUpdateCanGetRequiredExpenseTest()
+        {
+            PopulateMonthlyExpenseLists();
+            var expenseIdList = new int[] { 3 };
+
+            var expectedExpenseList = _monthlyBudgetInfoProvider.GetExpensesToUpdate(_currentMonthStub, expenseIdList);
+
+            Assert.AreEqual(_requiredExpenseStub, expectedExpenseList[0]);
+            Assert.AreEqual(expectedExpenseList[0].Type, "Required");
+        }
+
+        private void PopulateMonthlyExpenseLists()
+        {
+            _currentMonthStub.LuxuryExpenses = new List<Expense>
+            {
+                _luxuryExpenseStub
+            };
+            _currentMonthStub.MonthlyExpenses = new List<Expense>
+            {
+                _monthlyExpenseStub
+            };
+            _currentMonthStub.RequiredExpenses = new List<Expense>
+            {
+                _requiredExpenseStub
+            };
+        }
     }
 }

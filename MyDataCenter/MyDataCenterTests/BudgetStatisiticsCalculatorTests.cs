@@ -13,7 +13,7 @@ namespace MyDataCenterTests
         private List<Expense> _luxuryExpenseList;
         private List<Expense> _monthlyExpenseList;
         private List<Expense> _requiredExpenseList;
-        private IBudgetStatisicsCalculator _budgetStatisicsCalculator;
+        private IMonthlyBudgetStatisicsCalculator _budgetStatisicsCalculator;
         private Month _currentMonthStub;
 
         [SetUp]
