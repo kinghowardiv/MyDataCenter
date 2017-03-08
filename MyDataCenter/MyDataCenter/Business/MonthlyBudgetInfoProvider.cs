@@ -8,7 +8,7 @@ namespace MyDataCenter.Business
     {
         Month GetCurrentMonthInfo(int month, int year);
         void UpdateCurrentMonthInfo(int month, int year, Month monthInfo);
-        void UpdateExpenseInfo(int month, int year, Expense expense);
+        void SaveUpdatedExpenseInfo(int month, int year, Expense expense);
         List<Expense> GetExpensesToUpdate(Month monthInfo, int[] expensesIds);
         void DeleteExpense(int[] expenseIds);
     }
@@ -43,7 +43,7 @@ namespace MyDataCenter.Business
             _sqlDataAccessor.UpdateMonthlyInfo(monthInfo, month, year);
         }
 
-        public void UpdateExpenseInfo(int month, int year, Expense expense)
+        public void SaveUpdatedExpenseInfo(int month, int year, Expense expense)
         {
             _sqlDataAccessor.UpdateExpenseInfo(expense, month, year);
         }

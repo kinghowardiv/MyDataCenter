@@ -30,7 +30,7 @@
 }
 
 
-@using (Html.BeginForm("SelectUpdatedExpenseInfoToSave", "Budget"))
+@using (Html.BeginForm("UpdateExpenseInfo", "Budget"))
 {
     <h2>Required Expenses</h2>
     <table>
@@ -52,7 +52,7 @@
     </table>
 }
 
-@using (Html.BeginForm("SelectUpdatedExpenseInfoToSave", "Budget"))
+@using (Html.BeginForm("UpdateExpenseInfo", "Budget"))
 {
     <h2>Monthly Expenses</h2>
     <table>
@@ -74,7 +74,8 @@
     </tr>
 }
 
-<form action="" method="post">
+@using (Html.BeginForm("UpdateExpenseInfo", "Budget"))
+{
     <h2>Luxury Expenses</h2>
     <table>
         <tbody>
@@ -88,14 +89,11 @@
             }
         </tbody>
         <tr>
-            <td><input type="submit" value="Save" name="action:Save" /></td>
-            <td><input type="submit" value="Delete" name="action:Delete" /></td>
+            <td><input type="submit" value="Save" name="saveButton" /></td>
+            <td><input type="submit" value="Delete" name="deleteButton" /></td>
         </tr>
     </table>
-
-
-
-</form>
+}
 
 
     

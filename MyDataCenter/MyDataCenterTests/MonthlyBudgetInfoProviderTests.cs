@@ -106,7 +106,7 @@ namespace MyDataCenterTests
         [Test]
         public void UpdateExpenseUpdatesExpenseCorrectlyTest()
         {
-            _monthlyBudgetInfoProvider.UpdateExpenseInfo(1, 1, new Expense());
+            _monthlyBudgetInfoProvider.SaveUpdatedExpenseInfo(1, 1, new Expense());
 
             _sqlDataAccessorMock.Verify(x => x.UpdateExpenseInfo(It.IsAny<Expense>(), It.IsAny<int>(), It.IsAny<int>()), Times.Once);   
         }
@@ -145,6 +145,18 @@ namespace MyDataCenterTests
 
             Assert.AreEqual(_requiredExpenseStub, expectedExpenseList[0]);
             Assert.AreEqual(expectedExpenseList[0].Type, "Required");
+        }
+
+        [Test]
+        public void DeleteExpenseDeletesCorrectExpenseTest()
+        {
+            var expenseIds = new int[3];
+            expenseIds[0] = 1;
+            expenseIds[1] = 2;
+            expenseIds[2] = 3;
+            _monthlyBudgetInfoProvider.DeleteExpense(expenseIds);
+
+            _sqlDataAccessorMock.Verify(x => x.DeleteExpense(It.IsAny<int>()), Times.Exactly(3));
         }
 
         private void PopulateMonthlyExpenseLists()

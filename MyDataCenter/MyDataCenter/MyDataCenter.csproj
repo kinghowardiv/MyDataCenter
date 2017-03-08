@@ -312,7 +312,7 @@
     <Content Include="Views\Budget\UpdateCurrentMonthInfo.cshtml" />
     <Content Include="Views\Budget\SaveUpdatedMonthInfo.cshtml" />
     <Content Include="Views\Budget\SaveUpdatedExpenseInfo.cshtml" />
-    <Content Include="Views\Budget\SelectUpdatedExpenseInfoToSave.cshtml" />
+    <Content Include="Views\Budget\UpdateExpenseInfo.cshtml" />
     <Content Include="Views\Budget\DeleteExpense.cshtml" />
   </ItemGroup>
   <ItemGroup>

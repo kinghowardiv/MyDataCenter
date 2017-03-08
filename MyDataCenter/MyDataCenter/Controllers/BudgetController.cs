@@ -48,20 +48,14 @@ namespace MyDataCenter.Controllers
         }
 
         [HttpPost]
-        public ActionResult SelectUpdatedExpenseInfoToSave(Month monthInfo, int[] expensesIds)
+        public ActionResult UpdateExpenseInfo(int[] expensesIds, string saveButton, string deleteButton)
         {
-            var month = DateTime.Now.Month;
-            var year = DateTime.Now.Year;
-            var budgetInfoProvider = new MonthlyBudgetInfoProvider(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
+            var view = UpdateOrDeleteExpenseBasedOnButtonClick(expensesIds, saveButton, deleteButton);
 
-            monthInfo = budgetInfoProvider.GetCurrentMonthInfo(month - 1, year);
-            var expenseList = budgetInfoProvider.GetExpensesToUpdate(monthInfo, expensesIds);       
-
-            return View(expenseList);
+            return view;
         }
 
         [HttpPost]
-
         public ActionResult SaveUpdatedExpenseInfo(ICollection<Expense> expenses)
         {
             var month = DateTime.Now.Month;
@@ -71,7 +65,7 @@ namespace MyDataCenter.Controllers
 
             foreach (var expense in expenses)
             {
-                budgetInfoProvider.UpdateExpenseInfo(month - 1, year, expense);
+                budgetInfoProvider.SaveUpdatedExpenseInfo(month - 1, year, expense);
             }
             
             ModelState.Clear();
@@ -79,18 +73,25 @@ namespace MyDataCenter.Controllers
             return View(monthInfo);
         }
 
-        [HttpPost]
-        public ActionResult DeleteExpense(Month monthInfo, int[] expensesIds)
+        private ActionResult UpdateOrDeleteExpenseBasedOnButtonClick(int[] expensesIds, string saveButton, string deleteButton)
         {
             var month = DateTime.Now.Month;
             var year = DateTime.Now.Year;
             var budgetInfoProvider = new MonthlyBudgetInfoProvider(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
 
-            budgetInfoProvider.DeleteExpense(expensesIds);
+            var monthInfo = budgetInfoProvider.GetCurrentMonthInfo(month - 1, year);
+            var expenseList = budgetInfoProvider.GetExpensesToUpdate(monthInfo, expensesIds);
 
-            ViewBag.DeleteMessage = expensesIds.Count() + " Expenses Deleted";
+            if (deleteButton != null)
+            {
+                budgetInfoProvider.DeleteExpense(expensesIds);
+                ViewBag.DeleteMessage = expensesIds.Count() + " Expenses Deleted";
 
-            return View();
+                monthInfo = budgetInfoProvider.GetCurrentMonthInfo(month - 1, year);
+                return (View("DeleteExpense", monthInfo));
+            }
+
+            return View(expenseList);
         }
     }
 }
