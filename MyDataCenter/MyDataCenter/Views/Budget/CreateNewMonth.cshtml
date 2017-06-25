@@ -1,0 +1,23 @@
+﻿@model MyDataCenter.Models.POCOS.Month
+
+@{
+    ViewBag.Title = "CreateNewMonth";
+}
+
+<h2>CreateNewMonth</h2>
+
+@using (Html.BeginForm("SaveNewMonthInfo", "Budget"))
+{
+    <div>
+        <div>
+            Month Name: <input type="text" name="Name" value="@Model.Name" />
+            Month Id: <input type="text" name="Name" value="@Model.Id" />
+            Month Total Pay: <input type="text" name="Price" value="@Model.TotalPay" />
+            Month Rent: <input type="text" name="Type" value="@Model.Rent" />
+            Month Utilities: <input type="text" name="Type" value="@Model.Utilities" />
+        </div>
+
+
+        <input type="submit" value="Save" />
+    </div>
+}

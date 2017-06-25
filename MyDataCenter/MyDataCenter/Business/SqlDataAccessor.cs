@@ -11,11 +11,14 @@ namespace MyDataCenter.Business
     {
         Month GetSingleMonthInfo(int currentMonth, int year);
         List<Expense> GetMonthlyExpenses(int currentMonth, int year);
-      //  void Update();
+        List<Month> GetAllMonthsInfo();
+        void CreateMonthInfo(Month monthInfo, int month, int year);
+        void DeleteMonthInfo(string monthId);
         void UpdateMonthlyInfo(Month monthInfo, int month, int year);
         void UpdateExpenseInfo(Expense expense, int month, int year);
-        void DeleteExpense(int expenseId);
         void CreateExpense(Expense expense, int month, int year);
+        void DeleteExpense(int expenseId);
+        //  void Update();
     }
 
     public class SqlDataAccessor : ISqlDataAccessor
@@ -59,6 +62,76 @@ namespace MyDataCenter.Business
             }
 
             return month;
+        }
+
+        public List<Month> GetAllMonthsInfo()
+        {
+            var myConnection = GetSqlConnection();
+            var months = new List<Month>();
+
+            myConnection.Open();
+
+            try
+            {
+                SqlDataReader myReader = null;
+                var myCommand = new SqlCommand("SELECT * FROM Month",
+                                                         myConnection);
+                myReader = myCommand.ExecuteReader();
+                while (myReader.Read())
+                {
+                    var month = new Month();
+
+                    month.TotalPay = Convert.ToDouble(myReader["TotalPay"]);
+                    month.Rent = Convert.ToDouble(myReader["Rent"]);
+                    month.Utilities = Convert.ToDouble(myReader["Utilities"]);
+                    month.Name = myReader["Name"].ToString();
+
+                    months.Add(month);
+                }
+
+                myConnection.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            return months;
+        }
+
+
+        public void DeleteMonthInfo(string monthId)
+        {
+            var myConnection = GetSqlConnection();
+
+            myConnection.Open();
+
+            var myCommand = new SqlCommand();
+            myCommand.Connection = myConnection;
+            myCommand.CommandType = CommandType.Text;
+
+            myCommand.CommandText = "DELETE FROM Month WHERE Id=" + monthId;
+            myCommand.ExecuteNonQuery();
+
+            myConnection.Close();
+        }
+
+        public void CreateMonthInfo(Month monthInfo, int month, int year)
+        {
+            var myConnection = GetSqlConnection();
+
+            myConnection.Open();
+
+            var myCommand = new SqlCommand();
+            myCommand.Connection = myConnection;
+            myCommand.CommandType = CommandType.Text;
+
+            myCommand.CommandText = "INSERT INTO Month(Id, TotalPay, Rent, Utilities, Name) " +
+               "VALUES('" + month + "_" + year + "'," + monthInfo.TotalPay + "," + monthInfo.Rent + "," + monthInfo.Utilities + ",'" + monthInfo.Name + "')";
+            myCommand.ExecuteNonQuery();
+
+            myConnection.Close();
         }
 
         public List<Expense> GetMonthlyExpenses(int currentMonth, int year)

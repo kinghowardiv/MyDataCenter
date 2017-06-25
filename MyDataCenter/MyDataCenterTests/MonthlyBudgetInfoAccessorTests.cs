@@ -72,6 +72,16 @@ namespace MyDataCenterTests
         }
 
         [Test]
+        public void CreateNewMonthTest()
+        {
+            var testMonth = new Month();
+
+            _monthlyBudgetInfoProvider.CreateNewMonthInfo(testMonth, 1, 1);
+
+            _sqlDataAccessorMock.Verify(x => x.CreateMonthInfo(testMonth, 1, 1));
+        }
+
+        [Test]
         public void GetCurrentMonthInfoReturnsTheInfoForCurrentMonthTest()
         {
             var month = _monthlyBudgetInfoProvider.GetCurrentMonthInfo(1, 1);

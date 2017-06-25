@@ -47,6 +47,35 @@ namespace MyDataCenter.Controllers
             return View();
         }
 
+        public ActionResult ViewAllMonthsInfo()
+        {
+            var budgetInfoProvider = new MonthlyBudgetInfoAccessor(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
+            var months = budgetInfoProvider.GetAllMonthsInfo();
+
+            return View(months);
+        }
+
+        public ActionResult CreateNewMonth()
+        {
+            var month = new Month();
+
+            return View(month);
+        }
+
+        [HttpPost]
+        public ActionResult SaveNewMonthInfo(Month monthInfo)
+        {
+            var month = DateTime.Now.Month;
+            var year = DateTime.Now.Year;
+            var budgetInfoProvider = new MonthlyBudgetInfoAccessor(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
+
+            budgetInfoProvider.CreateNewMonthInfo(monthInfo, month - 2, year);
+
+            var months = budgetInfoProvider.GetAllMonthsInfo();
+
+            return View("ViewAllMonthsInfo", months);
+        }
+
         [HttpPost]
         public ActionResult UpdateExpenseInfo(int[] expensesIds, string saveButton, string deleteButton)
         {

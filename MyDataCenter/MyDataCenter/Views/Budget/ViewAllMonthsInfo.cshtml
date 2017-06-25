@@ -1,0 +1,37 @@
+﻿@model IEnumerable<MyDataCenter.Models.POCOS.Month>
+
+@{
+    ViewBag.Title = "ViewAllMonthsInfo";
+}
+
+@using (Html.BeginForm("CreateNewMonth", "Budget"))
+{
+    <td><input type="submit" value="Create New Month" name="saveButton" /></td>
+}
+
+@using (Html.BeginForm("UpdateExpenseInfo", "Budget"))
+{
+    <h2>All Months</h2>
+    <table id="table">
+        <tr>
+            <th>Name</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><input id="expenses" name="expensesIds" type="checkbox" value="@item.Id" /> </td>
+                <td>@item.Name</td>
+            </tr>
+        }
+        <tr>
+            <td><input type="submit" value="Save" name="saveButton" /></td>
+            <td><input type="submit" value="Delete" name="deleteButton" /></td>
+        </tr>
+    </table>
+
+}
+

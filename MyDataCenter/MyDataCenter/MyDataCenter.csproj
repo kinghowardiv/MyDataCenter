@@ -315,6 +315,8 @@
     <Content Include="Views\Budget\UpdateExpenseInfo.cshtml" />
     <Content Include="Views\Budget\DeleteExpense.cshtml" />
     <Content Include="Views\Budget\NewExpense.cshtml" />
+    <Content Include="Views\Budget\ViewAllMonthsInfo.cshtml" />
+    <Content Include="Views\Budget\CreateNewMonth.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
