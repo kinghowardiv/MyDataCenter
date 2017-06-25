@@ -219,7 +219,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Business\MonthlyBudgetInfoProvider.cs" />
+    <Compile Include="Business\MonthlyBudgetInfoAccessor.cs" />
     <Compile Include="Business\MonthlyBudgetStatisticsCalculator.cs" />
     <Compile Include="Business\EmailProvider.cs" />
     <Compile Include="Business\SqlDataAccessor.cs" />
@@ -314,6 +314,7 @@
     <Content Include="Views\Budget\SaveUpdatedExpenseInfo.cshtml" />
     <Content Include="Views\Budget\UpdateExpenseInfo.cshtml" />
     <Content Include="Views\Budget\DeleteExpense.cshtml" />
+    <Content Include="Views\Budget\NewExpense.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

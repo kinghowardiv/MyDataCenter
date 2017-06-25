@@ -14,7 +14,7 @@ namespace MyDataCenter.Controllers
         {
             var month = DateTime.Now.Month;
             var year = DateTime.Now.Year;
-            var budgetInfoProvider = new MonthlyBudgetInfoProvider(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
+            var budgetInfoProvider = new MonthlyBudgetInfoAccessor(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
 
             var currentMonthInfo = budgetInfoProvider.GetCurrentMonthInfo(month-1, year);
 
@@ -27,7 +27,7 @@ namespace MyDataCenter.Controllers
         {
             var month = DateTime.Now.Month;
             var year = DateTime.Now.Year;
-            var budgetInfoProvider = new MonthlyBudgetInfoProvider(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
+            var budgetInfoProvider = new MonthlyBudgetInfoAccessor(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
 
             var monthInfo = budgetInfoProvider.GetCurrentMonthInfo(month - 1, year);
 
@@ -39,7 +39,7 @@ namespace MyDataCenter.Controllers
         {
             var month = DateTime.Now.Month;
             var year = DateTime.Now.Year;
-            var budgetInfoProvider = new MonthlyBudgetInfoProvider(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
+            var budgetInfoProvider = new MonthlyBudgetInfoAccessor(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
 
             budgetInfoProvider.UpdateCurrentMonthInfo(month - 1, year, monthInfo);
             ModelState.Clear();
@@ -60,7 +60,7 @@ namespace MyDataCenter.Controllers
         {
             var month = DateTime.Now.Month;
             var year = DateTime.Now.Year;
-            var budgetInfoProvider = new MonthlyBudgetInfoProvider(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
+            var budgetInfoProvider = new MonthlyBudgetInfoAccessor(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
             var monthInfo = budgetInfoProvider.GetCurrentMonthInfo(month - 1, year);
 
             foreach (var expense in expenses)
@@ -73,11 +73,35 @@ namespace MyDataCenter.Controllers
             return View(monthInfo);
         }
 
+        [HttpPost]
+        public ActionResult SaveNewExpense(Expense expense)
+        {
+            var month = DateTime.Now.Month;
+            var year = DateTime.Now.Year;
+            var budgetInfoProvider = new MonthlyBudgetInfoAccessor(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
+
+            expense.Id = 81;
+            budgetInfoProvider.CreateExpense(expense, month-1, year);            
+
+            ModelState.Clear();
+
+            var monthInfo = budgetInfoProvider.GetCurrentMonthInfo(month - 1, year);
+
+            return View("CurrentMonthInfo", monthInfo);
+        }
+
+        public ActionResult NewExpense()
+        {
+            var expense = new Expense();
+
+            return View(expense);
+        }
+
         private ActionResult UpdateOrDeleteExpenseBasedOnButtonClick(int[] expensesIds, string saveButton, string deleteButton)
         {
             var month = DateTime.Now.Month;
             var year = DateTime.Now.Year;
-            var budgetInfoProvider = new MonthlyBudgetInfoProvider(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
+            var budgetInfoProvider = new MonthlyBudgetInfoAccessor(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
 
             var monthInfo = budgetInfoProvider.GetCurrentMonthInfo(month - 1, year);
             var expenseList = budgetInfoProvider.GetExpensesToUpdate(monthInfo, expensesIds);
@@ -88,7 +112,7 @@ namespace MyDataCenter.Controllers
                 ViewBag.DeleteMessage = expensesIds.Count() + " Expenses Deleted";
 
                 monthInfo = budgetInfoProvider.GetCurrentMonthInfo(month - 1, year);
-                return (View("DeleteExpense", monthInfo));
+                return View("DeleteExpense", monthInfo);
             }
 
             return View(expenseList);

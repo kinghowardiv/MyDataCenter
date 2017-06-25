@@ -11,19 +11,19 @@ namespace MyDataCenter.Business
     {
         Month GetSingleMonthInfo(int currentMonth, int year);
         List<Expense> GetMonthlyExpenses(int currentMonth, int year);
-       // void Update();
+      //  void Update();
         void UpdateMonthlyInfo(Month monthInfo, int month, int year);
         void UpdateExpenseInfo(Expense expense, int month, int year);
         void DeleteExpense(int expenseId);
-        void CreateExpense(Expense expense);
+        void CreateExpense(Expense expense, int month, int year);
     }
 
     public class SqlDataAccessor : ISqlDataAccessor
     {        
         private SqlConnection GetSqlConnection()
         {
-            return new SqlConnection("user id=HOWIE-PC\\HOWIE;" +
-                                       "password=Rusty123;server=HOWIE-PC;" +
+            return new SqlConnection(@"user id=MicrosoftAccount\hapetersiv@gmail.com;" +
+                                       @"password=Rusty123;server=DESKTOP-HG5PT58\SQLEXPRESS;" +
                                        "Trusted_Connection=yes;" +
                                        "database=MyDataCenter; " +
                                        "connection timeout=30");
@@ -71,7 +71,7 @@ namespace MyDataCenter.Business
             try
             {
                 SqlDataReader myReader = null;
-                SqlCommand myCommand = new SqlCommand("SELECT * FROM Expenses WHERE MonthId='" + currentMonth + "_" + year + "'",
+                SqlCommand myCommand = new SqlCommand("SELECT * FROM Expense WHERE MonthId='" + currentMonth + "_" + year + "'",
                                                          myConnection);
                 myReader = myCommand.ExecuteReader();
                 while (myReader.Read())
@@ -124,7 +124,7 @@ namespace MyDataCenter.Business
             myCommand.Connection = myConnection;
             myCommand.CommandType = CommandType.Text;
 
-            myCommand.CommandText = "UPDATE Expenses SET Price=" + expense.Price + ", Name='" +  expense.Name + "', Type='" + expense.Type + "' WHERE Id =" + expense.Id;
+            myCommand.CommandText = "UPDATE Expense SET Price=" + expense.Price + ", Name='" +  expense.Name + "', Type='" + expense.Type + "' WHERE Id =" + expense.Id;
             myCommand.ExecuteNonQuery();
 
             myConnection.Close();
@@ -140,13 +140,13 @@ namespace MyDataCenter.Business
             myCommand.Connection = myConnection;
             myCommand.CommandType = CommandType.Text;
 
-            myCommand.CommandText = "DELETE FROM Expenses WHERE Id=" + expenseId;
+            myCommand.CommandText = "DELETE FROM Expense WHERE Id=" + expenseId;
             myCommand.ExecuteNonQuery();
 
             myConnection.Close();
         }
 
-        public void CreateExpense(Expense expense)
+        public void CreateExpense(Expense expense, int month, int year)
         {
             var myConnection = GetSqlConnection();
 
@@ -156,8 +156,10 @@ namespace MyDataCenter.Business
             myCommand.Connection = myConnection;
             myCommand.CommandType = CommandType.Text;
 
-            myCommand.CommandText = "INSERT INTO Expenses (Id, MonthId, Name, Price, Type) " +
-               "VALUES(" + expense.Id + ",'" + expense.MonthId + "','" + expense.Name + "'," + expense.Price + ",'" + expense.Type + "'"; 
+            expense.MonthId = month + "_" + year;
+
+            myCommand.CommandText = "INSERT INTO Expense (Id, MonthId, Name, Price, Type) " +
+               "VALUES(" + expense.Id + ",'" + expense.MonthId + "','" + expense.Name + "'," + expense.Price + ",'" + expense.Type + "')"; 
             myCommand.ExecuteNonQuery();
 
             myConnection.Close();
@@ -177,11 +179,14 @@ namespace MyDataCenter.Business
 
                 foreach(var name in namesList)
                 {
+                    name.Trim();
+                    priceList[counter].Trim();
+                    var priceAsInt = Convert.ToDouble(priceList[counter]);
                     var myCommand = new SqlCommand();
                     myCommand.Connection = myConnection;
                     myCommand.CommandType = CommandType.Text;
 
-                    myCommand.CommandText = "insert into Expenses(Name, Price, Type, MonthId, Id) Values('" + name + "'," + priceList[counter] + ", 'Luxury', '2_2017'," + (counter + 7) + ")";
+                    myCommand.CommandText = "insert into Expense(Name, Price, Type, MonthId, Id) Values('" + name + "'," + priceList[counter] + ", 'Luxury', '5_2017'," + (counter + 7) + ")";
                     myCommand.ExecuteNonQuery();
                     counter++;
                 }

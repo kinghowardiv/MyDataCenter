@@ -4,21 +4,22 @@ using System.Linq;
 
 namespace MyDataCenter.Business
 {
-    public interface IMonthlyBudgetInfoProvider
+    public interface IMonthlyBudgetInfoAccessor
     {
         Month GetCurrentMonthInfo(int month, int year);
         void UpdateCurrentMonthInfo(int month, int year, Month monthInfo);
         void SaveUpdatedExpenseInfo(int month, int year, Expense expense);
         List<Expense> GetExpensesToUpdate(Month monthInfo, int[] expensesIds);
         void DeleteExpense(int[] expenseIds);
+        void CreateExpense(Expense newExpense, int month, int year);
     }
 
-    public class MonthlyBudgetInfoProvider : IMonthlyBudgetInfoProvider
+    public class MonthlyBudgetInfoAccessor : IMonthlyBudgetInfoAccessor
     {
         private ISqlDataAccessor _sqlDataAccessor;
         private IMonthlyBudgetStatisicsCalculator _budgetStatsCalc;
 
-        public MonthlyBudgetInfoProvider(ISqlDataAccessor sqlDataAccessor, IMonthlyBudgetStatisicsCalculator budgetStatsCalc)
+        public MonthlyBudgetInfoAccessor(ISqlDataAccessor sqlDataAccessor, IMonthlyBudgetStatisicsCalculator budgetStatsCalc)
         {
             _sqlDataAccessor = sqlDataAccessor;
             _budgetStatsCalc = budgetStatsCalc;
@@ -78,6 +79,11 @@ namespace MyDataCenter.Business
             {
                 _sqlDataAccessor.DeleteExpense(id);
             }
+        }
+
+        public void CreateExpense(Expense newExpense, int month, int year)
+        {
+            _sqlDataAccessor.CreateExpense(newExpense, month, year);
         }
 
         private List<Expense> GetRequiredExpenses(List<Expense> allMonthlyExpenses)

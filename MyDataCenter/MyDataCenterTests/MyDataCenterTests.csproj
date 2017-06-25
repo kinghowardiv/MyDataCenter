@@ -65,7 +65,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BudgetStatisiticsCalculatorTests.cs" />
-    <Compile Include="MonthlyBudgetInfoProviderTests.cs" />
+    <Compile Include="MonthlyBudgetInfoAccessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

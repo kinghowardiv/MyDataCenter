@@ -1,0 +1,23 @@
+﻿@model MyDataCenter.Models.POCOS.Expense
+
+@{
+    ViewBag.Title = "Expenses to Update";
+}
+
+<h1>@ViewBag.Title.</h1>
+
+@using (Html.BeginForm("SaveNewExpense", "Budget"))
+{
+    <div>
+        <div>
+                Expense Name: <input type="text" name="Name" value="@Model.Name"/>
+                Expense Price: <input type="text" name="Price" value="@Model.Price" />
+                Expense Type: <input type="text" name="Type" value="@Model.Type" />
+        </div>
+        
+
+        <input type="submit" value="Save" />
+    </div>
+}
+
+

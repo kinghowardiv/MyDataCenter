@@ -29,8 +29,8 @@ namespace MyDataCenter.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-         //   var sqlConnector = new SqlDataAccessor();
-         //   sqlConnector.Update();
+       //     var sqlConnector = new SqlDataAccessor();
+        //    sqlConnector.Update();
             return View();
         }
     }

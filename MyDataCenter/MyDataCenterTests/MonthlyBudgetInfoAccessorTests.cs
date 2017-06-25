@@ -7,9 +7,9 @@ using System.Collections.Generic;
 namespace MyDataCenterTests
 {
     [TestFixture]
-    public class MonthlyBudgetInfoProviderTests
+    public class MonthlyBudgetInfoAccessorTests
     {
-        private IMonthlyBudgetInfoProvider _monthlyBudgetInfoProvider;
+        private IMonthlyBudgetInfoAccessor _monthlyBudgetInfoProvider;
         private Mock<ISqlDataAccessor> _sqlDataAccessorMock;
         private Mock<IMonthlyBudgetStatisicsCalculator> _budgetStatsCalculatorMock;
         private Month _currentMonthStub;
@@ -52,7 +52,7 @@ namespace MyDataCenterTests
 
             _budgetStatsCalculatorMock = new Mock<IMonthlyBudgetStatisicsCalculator>();
            
-            _monthlyBudgetInfoProvider = new MonthlyBudgetInfoProvider(_sqlDataAccessorMock.Object, _budgetStatsCalculatorMock.Object);
+            _monthlyBudgetInfoProvider = new MonthlyBudgetInfoAccessor(_sqlDataAccessorMock.Object, _budgetStatsCalculatorMock.Object);
         }
 
         [Test]
@@ -154,9 +154,29 @@ namespace MyDataCenterTests
             expenseIds[0] = 1;
             expenseIds[1] = 2;
             expenseIds[2] = 3;
+            
             _monthlyBudgetInfoProvider.DeleteExpense(expenseIds);
 
             _sqlDataAccessorMock.Verify(x => x.DeleteExpense(It.IsAny<int>()), Times.Exactly(3));
+        }
+
+        [Test]
+        public void CreateExpenseTest()
+        {
+            var testMonth = 5;
+            var testYear = 2017;
+
+            var testExpense = new Expense
+            {
+                Name = "test",
+                Price = 5,
+                Type = "Luxury",
+                Id = 5
+            };
+
+            _monthlyBudgetInfoProvider.CreateExpense(testExpense, testMonth, testYear);
+
+            _sqlDataAccessorMock.Verify(x => x.CreateExpense(testExpense, testMonth, testYear));
         }
 
         private void PopulateMonthlyExpenseLists()
