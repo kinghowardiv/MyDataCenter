@@ -308,14 +308,14 @@
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Movies\Edit.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
-    <Content Include="Views\Budget\CurrentMonthInfo.cshtml" />
-    <Content Include="Views\Budget\UpdateCurrentMonthInfo.cshtml" />
+    <Content Include="Views\Budget\CurrentMonthInfoView.cshtml" />
+    <Content Include="Views\Budget\UpdateCurrentMonthInfoView.cshtml" />
     <Content Include="Views\Budget\SaveUpdatedMonthInfo.cshtml" />
     <Content Include="Views\Budget\SaveUpdatedExpenseInfo.cshtml" />
     <Content Include="Views\Budget\UpdateExpenseInfo.cshtml" />
     <Content Include="Views\Budget\DeleteExpense.cshtml" />
     <Content Include="Views\Budget\NewExpense.cshtml" />
-    <Content Include="Views\Budget\ViewAllMonthsInfo.cshtml" />
+    <Content Include="Views\Budget\AllMonthsInfoView.cshtml" />
     <Content Include="Views\Budget\CreateNewMonth.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,8 @@ namespace MyDataCenter.Controllers
     public class BudgetController : Controller
     {
 
-        public ActionResult CurrentMonthInfo()
+        #region Month
+        public ActionResult CurrentMonthInfoView()
         {
             var month = DateTime.Now.Month;
             var year = DateTime.Now.Year;
@@ -23,7 +24,7 @@ namespace MyDataCenter.Controllers
             return View(currentMonthInfo);
         }
 
-        public ActionResult UpdateCurrentMonthInfo()
+        public ActionResult UpdateCurrentMonthInfoView()
         {
             var month = DateTime.Now.Month;
             var year = DateTime.Now.Year;
@@ -32,6 +33,14 @@ namespace MyDataCenter.Controllers
             var monthInfo = budgetInfoProvider.GetCurrentMonthInfo(month - 1, year);
 
             return View(monthInfo);
+        }
+
+        public ActionResult AllMonthsInfoView()
+        {
+            var budgetInfoProvider = new MonthlyBudgetInfoAccessor(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
+            var months = budgetInfoProvider.GetAllMonthsInfo();
+
+            return View(months);
         }
 
         [HttpPost]
@@ -45,14 +54,6 @@ namespace MyDataCenter.Controllers
             ModelState.Clear();
 
             return View();
-        }
-
-        public ActionResult ViewAllMonthsInfo()
-        {
-            var budgetInfoProvider = new MonthlyBudgetInfoAccessor(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
-            var months = budgetInfoProvider.GetAllMonthsInfo();
-
-            return View(months);
         }
 
         public ActionResult CreateNewMonth()
@@ -77,12 +78,42 @@ namespace MyDataCenter.Controllers
         }
 
         [HttpPost]
+        public ActionResult UpdateMonthInfo(Month monthInfo, string saveButton, string deleteButton)
+        {
+            var view = UpdateOrDeleteMonthBasedOnButtonClick(monthInfo, saveButton, deleteButton);
+
+            return view;
+        }
+
+        private ActionResult UpdateOrDeleteMonthBasedOnButtonClick(Month monthInfo, string saveButton, string deleteButton)
+        {
+            var month = DateTime.Now.Month;
+            var year = DateTime.Now.Year;
+            var budgetInfoProvider = new MonthlyBudgetInfoAccessor(new SqlDataAccessor(), new MonthlyBudgetStatisticsCalculator());
+
+            if (deleteButton != null)
+            {
+                budgetInfoProvider.DeleteMonth(monthInfo);
+
+                monthInfo = budgetInfoProvider.GetCurrentMonthInfo(month - 1, year);
+                return View("DeleteExpense", monthInfo);
+            }
+
+            return View();
+        }
+
+        #endregion
+
+        #region Expense
+
+        [HttpPost]
         public ActionResult UpdateExpenseInfo(int[] expensesIds, string saveButton, string deleteButton)
         {
             var view = UpdateOrDeleteExpenseBasedOnButtonClick(expensesIds, saveButton, deleteButton);
 
             return view;
         }
+
 
         [HttpPost]
         public ActionResult SaveUpdatedExpenseInfo(ICollection<Expense> expenses)
@@ -146,5 +177,7 @@ namespace MyDataCenter.Controllers
 
             return View(expenseList);
         }
+
+        #endregion
     }
 }
