@@ -149,7 +149,6 @@ C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\Microsoft.Owin.Security.Cookies.dll
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\EntityFramework.dll
-C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\Microsoft.Exchange.WebServices.dll
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\Microsoft.Web.Infrastructure.dll
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\System.Web.Razor.dll
@@ -170,8 +169,6 @@ C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\Microsoft.Owin.Security.Cookies.xml
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\EntityFramework.xml
-C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\Microsoft.Exchange.WebServices.pdb
-C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\Microsoft.Exchange.WebServices.xml
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\System.Web.Razor.xml
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenterTests\bin\Debug\System.Web.WebPages.Razor.xml

@@ -12,8 +12,6 @@ namespace MyDataCenter.Controllers
     {
         public ActionResult Index()
         {
-            var emailProvier = new EmailProvider();
-            emailProvier.GetEmails();
             return View();
         }
 

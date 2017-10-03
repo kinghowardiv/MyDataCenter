@@ -3,11 +3,18 @@
 @{
     ViewBag.Title = "Update This Month's Budget";
 }
-
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 <h1>@ViewBag.Title.</h1>
 
 <h2>Update Budget Basics</h2>
-@using (Html.BeginForm("SaveUpdatedMonthInfo", "Budget"))
+@using (Html.BeginForm("DisplayMonthInfoForEdditing", "Budget"))
 {
     <p>Budget Name</p>
     @Html.TextBoxFor(model => model.Name)
@@ -26,7 +33,7 @@
     <br />
     <br />
 
-    <input type="submit" value="Save" />
+    <input type="submit" value="Update Budget Info" />
 }
 
 <h2>This Month's Expenses</h2>
