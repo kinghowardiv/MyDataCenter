@@ -1,7 +1,11 @@
 ﻿@model MyDataCenter.Models.POCOS.Month
-
+<br />
+<br />
+<br />
+<br />
+<br />
 @{
-    ViewBag.Title = "Upload Sheets";
+    ViewBag.Title = "Update Current Month Information";
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -9,9 +13,19 @@
 @using (Html.BeginForm("SaveUpdatedMonthInfo", "Budget"))
 
 {
+    <H3>Budget Name</H3>
     @Html.TextBoxFor(model => model.Name)
+    <br />
+    <H3>Total Pay</H3>
     @Html.TextBoxFor(model => model.TotalPay)
+    <br />
+    <H3>Rent</H3>
     @Html.TextBoxFor(model => model.Rent)
+    <br />
+    <H3>Utilities</H3>
     @Html.TextBoxFor(model => model.Utilities)
-    <input type="submit" value="Save" />
+    <br />
+    <br />
+    <br />
+    <input type="submit" value="Save Updated Info" />
 }

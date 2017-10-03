@@ -9,7 +9,7 @@ namespace MyDataCenter.Business
         Month GetCurrentMonthInfo(int month, int year);
         void UpdateCurrentMonthInfo(int month, int year, Month monthInfo);
         void CreateNewMonthInfo(Month monthInfo, int month, int year);
-        void DeleteMonth(Month monthInfo);
+        void DeleteMonth(string monthId);
         List<Month> GetAllMonthsInfo();
         void SaveUpdatedExpenseInfo(int month, int year, Expense expense);
         List<Expense> GetExpensesToUpdate(Month monthInfo, int[] expensesIds);
@@ -59,9 +59,9 @@ namespace MyDataCenter.Business
             _sqlDataAccessor.CreateMonthInfo(monthInfo, month, year);
         }
 
-        public void DeleteMonth(Month monthInfo)
+        public void DeleteMonth(string monthId)
         {
-            _sqlDataAccessor.DeleteMonthInfo(monthInfo.Id);
+            _sqlDataAccessor.DeleteMonthInfo(monthId);
         }
 
         public void SaveUpdatedExpenseInfo(int month, int year, Expense expense)

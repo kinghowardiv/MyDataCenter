@@ -85,6 +85,7 @@ namespace MyDataCenter.Business
                     month.Rent = Convert.ToDouble(myReader["Rent"]);
                     month.Utilities = Convert.ToDouble(myReader["Utilities"]);
                     month.Name = myReader["Name"].ToString();
+                    month.Id = myReader["ID"].ToString();
 
                     months.Add(month);
                 }
