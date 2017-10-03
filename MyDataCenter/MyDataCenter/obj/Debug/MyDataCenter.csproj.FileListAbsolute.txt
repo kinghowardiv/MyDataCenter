@@ -286,6 +286,6 @@ C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenter\bin\Micro
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenter\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenter\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenter\bin\en-GB\System.Data.SqlLocalDb.resources.dll
-C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenter\obj\Debug\MyDataCenter.csprojResolveAssemblyReference.cache
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenter\obj\Debug\MyDataCenter.dll
 C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenter\obj\Debug\MyDataCenter.pdb
+C:\Users\hapet\Documents\GitHub\MyDataCenter\MyDataCenter\MyDataCenter\obj\Debug\MyDataCenter.csprojResolveAssemblyReference.cache
