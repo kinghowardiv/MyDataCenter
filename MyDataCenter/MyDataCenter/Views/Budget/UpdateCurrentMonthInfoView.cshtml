@@ -38,11 +38,6 @@
 
 <h2>This Month's Expenses</h2>
 
-@using (Html.BeginForm("NewExpense", "Budget"))
-{
-     <input type="submit" value="Save New Expense" name="expenseButton" />
-}
-
 @using (Html.BeginForm("UpdateExpenseInfo", "Budget"))
 {
     <h2>Required Expenses</h2>
@@ -106,6 +101,17 @@
             <td><input type="submit" value="Delete" name="deleteButton" /></td>
         </tr>
     </table>
+
+
+}
+
+<br />
+<br />
+<br />
+
+@using (Html.BeginForm("NewExpense", "Budget"))
+{
+    <input type="submit" value="Save New Expense" name="expenseButton" />
 }
 
 

@@ -25,11 +25,7 @@ namespace MyDataCenter.Business
     {        
         private SqlConnection GetSqlConnection()
         {
-            return new SqlConnection(@"user id=MicrosoftAccount\hapetersiv@gmail.com;" +
-                                       @"password=Rusty123;server=DESKTOP-HG5PT58\SQLEXPRESS;" +
-                                       "Trusted_Connection=yes;" +
-                                       "database=MyDataCenter; " +
-                                       "connection timeout=30");
+
         }
 
         public Month GetSingleMonthInfo(int currentMonth, int year)
